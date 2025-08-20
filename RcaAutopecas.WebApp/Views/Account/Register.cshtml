@@ -1,0 +1,84 @@
+﻿@model RegisterViewModel
+@{
+    // ESTA LINHA É A MAIS IMPORTANTE E RESOLVE O PROBLEMA
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+
+    ViewData["Title"] = "Cadastro";
+    ViewData["GreetingTitle"] = "Crie sua conta";
+    ViewData["GreetingMessage"] = "É rápido e fácil. Comece a usar o sistema agora mesmo.";
+}
+
+@section BackButton {
+    <a asp-action="Login" class="voltar"><i class="fa-solid fa-arrow-left me-2"></i>Voltar</a>
+}
+<!-- Adicionada a classe "form" para aplicar os estilos de compactação -->
+<form asp-controller="Account" asp-action="Register" method="post" class="register-form">
+    <h1 class="form-title mb-4"><strong>Cadastro</strong></h1>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="form-group">
+        <input asp-for="NomeDaEmpresa" class="form-control h-input" placeholder="Nome da empresa" />
+        <span asp-validation-for="NomeDaEmpresa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="Email" class="form-control h-input" placeholder="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="CNPJ" class="form-control h-input" placeholder="CNPJ" />
+        <span asp-validation-for="CNPJ" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="CEP" class="form-control h-input" placeholder="CEP" />
+        <span asp-validation-for="CEP" class="text-danger"></span>
+    </div>
+
+    <div class="row gx-2">
+        <div class="col-8">
+            <div class="form-group">
+                <input asp-for="Estado" class="form-control h-input" placeholder="Estado" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <input asp-for="Numero" class="form-control h-input" placeholder="Nº" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="Rua" class="form-control h-input" placeholder="Rua" />
+        <span asp-validation-for="Rua" class="text-danger"></span>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <input asp-for="Senha" class="form-control h-input" placeholder="Senha" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <input asp-for="ConfirmarSenha" class="form-control h-input" placeholder="Confirmar Senha" />
+                <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+            </div>
+        </div>
+        
+
+        
+    </div>
+     
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">CADASTRAR</button>
+    </div>
+
+    <div class="signup-link">
+        <span>Já tem uma conta? <a asp-controller="Account" asp-action="Login">Faça Login</a></span>
+    </div>
+</form>

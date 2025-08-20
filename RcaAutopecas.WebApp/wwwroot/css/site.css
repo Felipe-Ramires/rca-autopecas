@@ -1,0 +1,308 @@
+/*
+ * Global Styles
+ * --------------------------------------------------
+ */
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6; /* Fundo suave para destacar o container */
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+}
+
+/*
+ * Layout Container
+ * --------------------------------------------------
+ */
+
+.login-container > .row {
+    height: 100%;
+}
+.logo {
+    width: 245px;
+}
+/*
+ * Panels
+ * --------------------------------------------------
+ */
+
+.rca-painel {
+    color: #fff;
+    padding: 60px;
+    border-radius: 40px;
+    background-image: url(../images/fundo-azul.png);
+    background-size: cover;
+}
+
+.rca-intro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.form-painel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .form-painel form {
+        width: 100%;
+        max-width: 415px;
+    }
+.h-input {
+    height: 45px !important;
+}
+/*
+ * Typography
+ * --------------------------------------------------
+ */
+
+.saudacao {
+    font-size: 43px;
+}
+
+.desc-rca {
+    font-size: 20px;
+    margin-bottom: 10vh;
+}
+
+.form-title {
+    font-size: 3rem;
+}
+
+.voltar {
+    text-decoration: none;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+    .voltar i {
+        transition: transform 0.3s ease;
+    }
+
+    .voltar:hover {
+        color: #cceeff; /* tom mais claro no hover */
+    }
+
+        .voltar:hover i {
+            transform: translateX(-4px); /* move o ícone para a esquerda */
+        }
+/*
+ * Form Elements
+ * --------------------------------------------------
+ */
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    font-size: 18px;
+    border: none;
+    color: #838383;
+}
+
+    .form-control:focus {
+        outline: none;
+        border: 2px solid #0056b3;
+        background-color: #fff;
+    }
+
+.form-options {
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+    .form-options a,
+    .signup-link a {
+        color: #0056b3;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+.signup-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #555;
+}
+
+.col-md-8 .form-group,
+.col-md-4 .form-group {
+    width: 100%;
+}
+
+/*
+ * 
+    Buttons
+ * --------------------------------------------------
+ */
+
+.btn-primary {
+    width: 70%;
+    padding: 15px;
+    border: none;
+    border-radius: 70px;
+    margin-top: 40px;
+    background-color: #005095;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #003d7a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transform: scale(1.02); /* leve aumento ao passar o mouse */
+    }
+
+        .btn-primary:active {
+            background-color: #000; /* tom mais escuro que o hover */
+            transform: scale(0.98); /* botão encolhe levemente ao clicar */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+/*
+ * Social Media Elements
+ * --------------------------------------------------
+ */
+
+.whatsapp-fab {
+    position: fixed; /* Fica fixo na tela */
+    width: 75px; /* Ajuste o tamanho conforme necessário */
+    height: auto; /* Altura automática para manter a proporção da imagem */
+    bottom: 30px; /* Distância do fundo */
+    right: 30px; /* Distância da direita */
+    z-index: 1000; /* Garante que fique sobre os outros elementos */
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+    .whatsapp-fab:hover {
+        transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+    }
+
+    /* Estilo para a imagem dentro do link */
+    .whatsapp-fab img {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.25));
+    }
+
+    .social-login {
+    text-align: center;
+    margin-top: 45px;
+    color: #555;
+}
+
+    .social-login p {
+        margin-bottom: 15px;
+    }
+
+.social-icons a {
+    color: #333;
+    margin: 0 8px;
+    font-size: 2rem;
+    transition: color 0.3s;
+}
+
+    .social-icons a:hover {
+        color: #0056b3;
+    }
+
+/*
+ * Responsive Styles
+ * --------------------------------------------------
+ */
+
+@media (max-width: 768px) {
+    body {
+        background-image: url(../images/fundo-azul.png);
+        background-size: contain;
+        padding: 0;
+        background-size: cover;
+    }
+
+    .voltar {
+        margin-bottom: 3rem;
+    }
+
+    .login-container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+
+        .login-container > .row {
+            flex-direction: column;
+            height: auto;
+        }
+
+    .rca-painel {
+        background-image: none;
+        padding: 60px 35px;
+        width: 100%;
+    }
+
+    .desc-rca {
+        display: none;
+    }
+
+    .form-painel {
+        border-radius: 60px 60px 0 0;
+        background-color: #fff;
+        padding: 60px 35px;
+        width: 100%;
+    }
+
+        .form-painel h2 {
+            text-align: left;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+    .saudacao {
+        font-size: 40px;
+    }
+
+    .form-title {
+        font-size: 40px;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .form-control {
+        font-size: 1rem;
+    }
+
+    .form-options {
+        width: 100%;
+        text-align: right;
+    }
+
+    .btn-primary {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .logo {
+        max-width: 350px;
+    }
+}
