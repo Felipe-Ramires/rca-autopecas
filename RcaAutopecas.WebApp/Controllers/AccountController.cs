@@ -1,10 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RcaAutopecas.WebApp.ViewModels;
+using System.Threading.Tasks;
 
 namespace RcaAutopecas.WebApp.Controllers
 {
     public class AccountController : Controller
     {
+        
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -12,48 +24,62 @@ namespace RcaAutopecas.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // TODO: Lógica de autenticação com o banco de dados
-                return RedirectToAction("Index", "Dashboard"); // Redireciona para a página principal após o login
+                
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, isPersistent: false, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
             }
             return View(model);
         }
 
-        // Adicione estes métodos ao seu AccountController.cs
-
-        // GET: /Account/Register
-        // Ação para MOSTRAR a página de cadastro
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /Account/Register
-        // Ação para PROCESSAR os dados do formulário de cadastro
         [HttpPost]
-        [ValidateAntiForgeryToken] // Importante para segurança
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // TODO: Adicione sua lógica para criar o usuário no banco de dados.
-                // Se o cadastro for bem-sucedido, você pode redirecionar para o login
-                // ou para a página principal do sistema.
+                
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
 
-                // Por enquanto, vamos apenas redirecionar para a página de Login
-                // para que o novo usuário possa entrar.
-                return RedirectToAction("Login");
+                var result = await _userManager.CreateAsync(user, model.Senha);
+
+                if (result.Succeeded)
+                {           
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
-
-            // Se o modelo não for válido (algum campo está com erro),
-            // retorna para a tela de cadastro para exibir as mensagens de erro.
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
-
