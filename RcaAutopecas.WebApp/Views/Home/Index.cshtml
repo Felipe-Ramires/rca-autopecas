@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Página Principal";
+}
+
+@section sair {
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        <button type="submit" class="btn btn-link">Sair</button>
+    </form>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem-vindo!</h1>
+    <p>Você está logado no sistema RC&A Autopeças.</p>
+</div>
+
+
