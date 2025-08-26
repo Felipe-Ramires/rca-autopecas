@@ -4,9 +4,13 @@
 
 @section sair {
     <form asp-controller="Account" asp-action="Logout" method="post">
-        <button type="submit" class="btn btn-link">Sair</button>
+        @Html.AntiForgeryToken()
+        <button type="submit" style="background: none; border: none;">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
+        </button>
     </form>
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Bem-vindo!</h1>

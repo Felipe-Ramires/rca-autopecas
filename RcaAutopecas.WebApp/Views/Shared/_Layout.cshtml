@@ -3,48 +3,98 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RcaAutopecas.WebApp</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/stylesHome.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RcaAutopecas.WebApp.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <title>@ViewData["Title"] - RC&A</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RcaAutopecas.WebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+    <header class="mobile-header d-md-none">
+        <img src="~/images/logo-simbolo.png" alt="Logo" class="mobile-logo">
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+                aria-controls="menuLateral">
+            <i class="fas fa-bars fa-2xl" style="color:#ffffff;"></i>
+        </button>
+    </header>
+
+    <main class="container">
+
+        <aside class="nav-bar p-3 offcanvas-md offcanvas-start" tabindex="-1" id="menuLateral"
+               aria-labelledby="menuLateralLabel">
+
+            <nav class="nav-rca py-3">
+                <div class="rca-menu">
+                    <div class="logo-area">
+                        <img class="img-fluid" src="~/images/logo-simbolo.png" alt="">
+                    </div>
+                    <ul class="nav nav-pills flex-column mb-auto gap-3">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a href="" class="nav-link">
+                                <i class="fas fa-clipboard-check fa-2xl"
+                                   style="color:#ffffff;"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a href="" class="nav-link">
+                                <i class="fa-solid fa-car-side fa-2xl"
+                                   style="color:#ffffff"></i>
+                            </a>
                         </li>
-                        <li>
+                    </ul>
+                </div>
+                <div class="user-area mt-auto">
+                    <ul class="nav nav-pills flex-column mb-auto gap-3">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fa-solid fa-circle-user fa-2xl"
+                                   style="color:#ffffff"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             @RenderSection("sair", required: false)
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            </nav>
+        </aside>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - RcaAutopecas.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+        <section>
+            <div class="container-fluid bg-white p-3 px-md-5 rounded-3 shadow-sm mb-4">
+                <div class="row gy-3 align-items-center">
+
+                    <div class="col-md-auto col-6 order-1">
+                        <h1 class="h4 mb-0 fw-bold">Pedidos</h1>
+                    </div>
+
+                    <div class="col-md-auto col-6 text-end order-2 order-md-3">
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-plus me-1"></i>
+                            Criar Pedido
+                        </button>
+                    </div>
+
+                    <div class="col-md-5 col-12 order-3 order-md-2 ms-md-auto">
+                        <div class="search-container position-relative">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="form-control" placeholder="Pesquisar">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <article class="py-3 px-5 ">
+                <div>
+                    @RenderBody()
+                </div>
+            </article>
+        </section>
+
+    </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
