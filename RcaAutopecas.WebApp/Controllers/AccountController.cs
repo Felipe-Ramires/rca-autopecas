@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RcaAutopecas.WebApp.Models; 
 using RcaAutopecas.WebApp.ViewModels;
 using System.Threading.Tasks;
 
@@ -7,11 +8,10 @@ namespace RcaAutopecas.WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -29,12 +29,11 @@ namespace RcaAutopecas.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                // No login, o UserName deve ser o Email para o Identity encontrar o usuário
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, isPersistent: false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
@@ -54,16 +53,25 @@ namespace RcaAutopecas.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                // Crie um ApplicationUser e mapeie TODOS os campos
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email, // UserName é obrigatório e geralmente é o email
+                    Email = model.Email,
+                    NomeDaEmpresa = model.NomeDaEmpresa,
+                    CNPJ = model.CNPJ,
+                    CEP = model.CEP,
+                    Estado = model.Estado,
+                    Numero = model.Numero,
+                    Rua = model.Rua
+                };
 
                 var result = await _userManager.CreateAsync(user, model.Senha);
 
                 if (result.Succeeded)
-                {           
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    
-                    return RedirectToAction("Index", "Home");
+                {
+                    // Após o cadastro, redirecione para o login para garantir a segurança
+                    return RedirectToAction("Login", "Account");
                 }
 
                 foreach (var error in result.Errors)

@@ -41,6 +41,33 @@ aside.nav-bar.offcanvas-md {
     justify-content: center;
 }
 
+/* Estilos para os links da barra de navegação */
+.nav-rca .nav-link {
+    display: flex;
+    flex-direction: column; /* Coloca o ícone e a linha um sobre o outro */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    padding: 1rem 0; /* Espaçamento interno */
+    position: relative; /* Necessário para a linha branca */
+    gap: 8px; /* Espaço entre o ícone e a linha */
+}
+
+    /* A linha branca (criada com um pseudo-elemento) */
+    .nav-rca .nav-link::after {
+        content: '';
+        display: block;
+        width: 40%; /* Largura da linha */
+        height: 3px; /* Espessura da linha */
+        background-color: transparent; /* Fica invisível por padrão */
+        border-radius: 2px;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    /* Estilo para QUANDO o link estiver ativo */
+    .nav-rca .nav-link.active::after {
+        background-color: #ffffff; /* A linha se torna branca */
+    }
+
 section {
     width: 100%;
     display: flex;
@@ -113,6 +140,95 @@ article {
 .mobile-logo {
     height: 40px;
     width: auto;
+}
+
+/* ======================================================= */
+/* ESTILOS DA HOME (TABS DE NAVEGAÇÃO E CARDS)             */
+/* ======================================================= */
+
+#pills-tab .nav-link {
+    background: none;
+    border: 0;
+    color: #333;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin: 0 5px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+    #pills-tab .nav-link.active {
+        background-color: #005095;
+        color: #ffffff;
+    }
+
+    #pills-tab .nav-link:not(.active):hover {
+        background-color: #e9ecef;
+    }
+
+#pills-tab .nav-link {
+    background: none;
+    border: 0;
+    color: #333;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin: 0 5px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+    #pills-tab .nav-link.active {
+        background-color: #005095;
+        color: #ffffff;
+    }
+
+    /* Efeito de hover para abas inativas */
+    #pills-tab .nav-link:not(.active):hover {
+        background-color: #e9ecef;
+    }
+
+#pills-tabContent .card-custom {
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#pills-tabContent .card-light {
+    background-color: #f0f2f5;
+}
+
+#pills-tabContent .card-dark {
+    background-color: #005095;
+}
+
+    #pills-tabContent .card-dark .card-title,
+    #pills-tabContent .card-dark .card-subtitle {
+        color: #ffffff;
+    }
+
+    #pills-tabContent .card-dark .btn-light {
+        color: #005095;
+        font-weight: 600;
+    }
+
+#pills-tabContent .card-custom {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    #pills-tabContent .card-custom:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+    }
+
+.text-rcea {
+    color: #005095
+}
+
+.btn-primary-rca {
+    background-color: #005095;
+    color: #fff;
+    font-weight: 600;
 }
 
 @media (min-width: 768px) {

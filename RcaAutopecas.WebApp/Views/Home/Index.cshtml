@@ -11,10 +11,72 @@
     </form>
 }
 
+@section PageHeader {
+    
+}
 
-<div class="text-center">
-    <h1 class="display-4">Bem-vindo!</h1>
-    <p>Você está logado no sistema RC&A Autopeças.</p>
+
+<div class="container py-3">
+    <h2>Olá, @User.Identity.Name</h2>
+    <h4 class="text-secondary">Bom dia!</h4>
 </div>
 
+<ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                aria-selected="true">
+            Destaques
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                aria-selected="false">
+            Seus pedidos
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                aria-selected="false">
+            Meu Perfil
+        </button>
+    </li>
+</ul>
 
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="card card-custom card-light h-100">
+                    <div class="card-body">
+                        <img src="~/images/rca-favicon.png" alt="Logo DTS" class="mb-3" style="width: 40px;">
+                        <h4 class="card-title text-rcea fw-bold">DTS</h4>
+                        <h3 class="card-subtitle mb-4 fw-bold text-rcea">Para-Choques</h3>
+                        <a href="#" class="btn btn-primary-rca rounded-pill px-4">Confira</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-custom card-dark h-100">
+                    <div class="card-body">
+                        <img src="~/images/logo-simbolo.png" alt="Logo ARTEB" class="mb-3" style="width: 40px;">
+                        <h4 class="card-title fw-bold">ARTEB</h4>
+                        <h3 class="card-subtitle mb-4 fw-bold">Faróis e Lanternas</h3>
+                        <a href="#" class="btn btn-light rounded-pill px-4">Confira</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade container" id="pills-profile" role="tabpanel"
+         aria-labelledby="pills-profile-tab">
+        Conteúdo da aba Seus pedidos.
+    </div>
+    <div class="tab-pane fade container" id="pills-contact" role="tabpanel"
+         aria-labelledby="pills-contact-tab">
+        Conteúdo da aba Meu Perfil.
+    </div>
+</div>

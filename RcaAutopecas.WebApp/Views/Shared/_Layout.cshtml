@@ -66,9 +66,9 @@
         <section>
             <div class="container-fluid bg-white p-3 px-md-5 rounded-3 shadow-sm mb-4">
                 <div class="row gy-3 align-items-center">
-
+                   
                     <div class="col-md-auto col-6 order-1">
-                        <h1 class="h4 mb-0 fw-bold">Pedidos</h1>
+                        @await RenderSectionAsync("PageHeader", required: false)
                     </div>
 
                     <div class="col-md-auto col-6 text-end order-2 order-md-3">
@@ -87,10 +87,8 @@
 
                 </div>
             </div>
-            <article class="py-3 px-5 ">
-                <div>
-                    @RenderBody()
-                </div>
+            <article class="py-3 px-5 ">               
+                    @RenderBody()           
             </article>
         </section>
 
