@@ -30,7 +30,9 @@
             <nav class="nav-rca py-3">
                 <div class="rca-menu">
                     <div class="logo-area">
-                        <img class="img-fluid" src="~/images/logo-simbolo.png" alt="">
+                        <a asp-controller="Home" asp-action="Index">
+                            <img class="img-fluid" src="~/images/logo-simbolo.png" alt="">
+                        </a>
                     </div>
                     <ul class="nav nav-pills flex-column mb-auto gap-3">
                         <li class="nav-item">
@@ -50,7 +52,8 @@
                 <div class="user-area mt-auto">
                     <ul class="nav nav-pills flex-column mb-auto gap-3">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a asp-controller="Profile" asp-action="Index" class="nav-link">
+                                @* Perfil do Usuario *@
                                 <i class="fa-solid fa-circle-user fa-2xl"
                                    style="color:#ffffff"></i>
                             </a>

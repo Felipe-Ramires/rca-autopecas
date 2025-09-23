@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Meu Perfil";
+}
+
+@section sair {
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" style="background: none; border: none;">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
+        </button>
+    </form>
+}
+
+@section PageHeader {
+    <h3 class="m-0">Meu Perfil</h3>
+}
+
+<div class="profile-header">
+    <div class="profile-picture"></div>
+    <div class="profile-options">
+        <h3> @ViewData["NomeDaEmpresa"]</h3>
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    </div>
+</div>
