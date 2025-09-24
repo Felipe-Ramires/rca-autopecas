@@ -56,14 +56,23 @@ namespace RcaAutopecas.WebApp.Controllers
                 // Crie um ApplicationUser e mapeie TODOS os campos
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email, // UserName é obrigatório e geralmente é o email
+                    UserName = model.Email,
                     Email = model.Email,
-                    NomeDaEmpresa = model.NomeDaEmpresa,
+                    NomeFantasia = model.NomeFantasia,
+                    RazaoSocial = model.RazaoSocial,
                     CNPJ = model.CNPJ,
-                    CEP = model.CEP,
-                    Estado = model.Estado,
-                    Numero = model.Numero,
-                    Rua = model.Rua
+                    Telefone = model.Telefone,
+                    RamoDeAtividade = model.RamoDeAtividade,
+                    Endereco = new Endereco
+                    {
+                        CEP = model.CEP,
+                        Logradouro = model.Logradouro,
+                        Numero = model.Numero,
+                        Complemento = model.Complemento,
+                        Bairro = model.Bairro,
+                        Localidade = model.Localidade,
+                        UF = model.UF
+                    }
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Senha);

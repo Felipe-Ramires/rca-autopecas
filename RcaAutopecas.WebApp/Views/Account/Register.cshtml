@@ -1,8 +1,6 @@
-﻿@model RegisterViewModel
+@model RcaAutopecas.WebApp.ViewModels.RegisterViewModel
 @{
-    // ESTA LINHA É A MAIS IMPORTANTE E RESOLVE O PROBLEMA
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
-
     ViewData["Title"] = "Cadastro";
     ViewData["GreetingTitle"] = "Crie sua conta";
     ViewData["GreetingMessage"] = "É rápido e fácil. Comece a usar o sistema agora mesmo.";
@@ -17,64 +15,118 @@
 
     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-    <div class="form-group">
-        <input asp-for="NomeDaEmpresa" class="form-control h-input" placeholder="Nome da empresa" />
-        <span asp-validation-for="NomeDaEmpresa" class="text-danger"></span>
+    <h5 class="mt-4 mb-3">Dados da Empresa</h5>
+    <div class="row gx-2">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input asp-for="RazaoSocial" class="form-control h-input" placeholder="Razão Social" />
+                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input asp-for="NomeFantasia" class="form-control h-input" placeholder="Nome Fantasia" />
+                <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+            </div>
+        </div>
     </div>
+
+    <div class="row gx-2">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input asp-for="CNPJ" class="form-control h-input" placeholder="CNPJ" />
+                <span asp-validation-for="CNPJ" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input asp-for="Telefone" class="form-control h-input" placeholder="Telefone" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="RamoDeAtividade" class="form-control h-input" placeholder="Ramo de Atividade" />
+        <span asp-validation-for="RamoDeAtividade" class="text-danger"></span>
+    </div>
+
+    <h5 class="mt-4 mb-3">Endereço</h5>
+    
+    <div class="row gx-2">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input asp-for="CEP" class="form-control h-input" placeholder="CEP" />
+                <span asp-validation-for="CEP" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <input asp-for="Logradouro" class="form-control h-input" placeholder="Logradouro (Rua, Av.)" />
+                <span asp-validation-for="Logradouro" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gx-2">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input asp-for="Numero" class="form-control h-input" placeholder="Nº" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <input asp-for="Complemento" class="form-control h-input" placeholder="Complemento" />
+                <span asp-validation-for="Complemento" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gx-2">
+        <div class="col-md-5">
+            <div class="form-group">
+                <input asp-for="Bairro" class="form-control h-input" placeholder="Bairro" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <input asp-for="Localidade" class="form-control h-input" placeholder="Cidade" />
+                <span asp-validation-for="Localidade" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <input asp-for="UF" class="form-control h-input" placeholder="UF" />
+                <span asp-validation-for="UF" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="mt-4 mb-3">Credenciais</h5>
 
     <div class="form-group">
         <input asp-for="Email" class="form-control h-input" placeholder="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <input asp-for="CNPJ" class="form-control h-input" placeholder="CNPJ" />
-        <span asp-validation-for="CNPJ" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <input asp-for="CEP" class="form-control h-input" placeholder="CEP" />
-        <span asp-validation-for="CEP" class="text-danger"></span>
-    </div>
-
     <div class="row gx-2">
-        <div class="col-8">
-            <div class="form-group">
-                <input asp-for="Estado" class="form-control h-input" placeholder="Estado" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group">
-                <input asp-for="Numero" class="form-control h-input" placeholder="Nº" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <input asp-for="Rua" class="form-control h-input" placeholder="Rua" />
-        <span asp-validation-for="Rua" class="text-danger"></span>
-    </div>
-    <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
             <div class="form-group">
                 <input asp-for="Senha" class="form-control h-input" placeholder="Senha" />
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             <div class="form-group">
                 <input asp-for="ConfirmarSenha" class="form-control h-input" placeholder="Confirmar Senha" />
                 <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
             </div>
         </div>
-        
-
-        
     </div>
      
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-4">
         <button type="submit" class="btn btn-primary">CADASTRAR</button>
     </div>
 
@@ -82,3 +134,44 @@
         <span>Já tem uma conta? <a asp-controller="Account" asp-action="Login">Faça Login</a></span>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const cepInput = document.getElementById('CEP');
+
+            cepInput.addEventListener('blur', function () {
+                
+                const cep = this.value.replace(/\D/g, '');
+
+                if (cep.length === 8) {
+                    document.getElementById('Logradouro').value = '...';
+                    document.getElementById('Bairro').value = '...';
+                    document.getElementById('Localidade').value = '...';
+                    document.getElementById('UF').value = '...';
+
+                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.erro) {
+                                document.getElementById('Logradouro').value = data.logradouro;
+                                document.getElementById('Bairro').value = data.bairro;
+                                document.getElementById('Localidade').value = data.localidade;
+                                document.getElementById('UF').value = data.uf;
+                            } else {
+                                alert('CEP não encontrado.');
+                                document.getElementById('Logradouro').value = '';
+                                document.getElementById('Bairro').value = '';
+                                document.getElementById('Localidade').value = '';
+                                document.getElementById('UF').value = '';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Houve um erro ao buscar o CEP:', error);
+                        });
+                }
+            });
+        });
+    </script>
+}

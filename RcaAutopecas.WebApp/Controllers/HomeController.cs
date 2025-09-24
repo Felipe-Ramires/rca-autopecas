@@ -23,7 +23,7 @@ namespace RcaAutopecas.WebApp.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             // Passa o nome da empresa para a View
-            ViewData["NomeDaEmpresa"] = user?.NomeDaEmpresa;
+            ViewData["NomeFantasia"] = user?.NomeFantasia;
 
             return View();
         }

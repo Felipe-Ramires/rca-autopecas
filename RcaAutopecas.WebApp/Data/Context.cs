@@ -10,5 +10,17 @@ namespace RcaAutopecas.WebApp.Data
             : base(options)
         {
         }
+
+        public DbSet<Endereco> Enderecos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>()
+                .HasOne(a => a.Endereco)
+                .WithOne(e => e.ApplicationUser)
+                .HasForeignKey<Endereco>(e => e.ApplicationUserId);
+        }
     }
 }

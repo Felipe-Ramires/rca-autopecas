@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RcaAutopecas.WebApp.Data;
 
@@ -11,9 +12,11 @@ using RcaAutopecas.WebApp.Data;
 namespace RcaAutopecas.WebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250923202127_RefactorApplicationUserAndAddress")]
+    partial class RefactorApplicationUserAndAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,15 +268,19 @@ namespace RcaAutopecas.WebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Complemento")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ddd")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gia")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ibge")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Localidade")
@@ -289,6 +296,7 @@ namespace RcaAutopecas.WebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Siafi")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UF")
