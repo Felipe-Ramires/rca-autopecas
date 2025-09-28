@@ -1,0 +1,23 @@
+﻿body {
+}
+.whatsapp-fab {
+    position: fixed; /* Fica fixo na tela */
+    width: 75px; /* Ajuste o tamanho conforme necessário */
+    height: auto; /* Altura automática para manter a proporção da imagem */
+    bottom: 30px; /* Distância do fundo */
+    right: 30px; /* Distância da direita */
+    z-index: 1000; /* Garante que fique sobre os outros elementos */
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+    .whatsapp-fab:hover {
+        transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+    }
+
+    /* Estilo para a imagem dentro do link */
+    .whatsapp-fab img {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.25));
+    }

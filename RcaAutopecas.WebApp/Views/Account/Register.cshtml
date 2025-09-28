@@ -2,176 +2,258 @@
 @{
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
     ViewData["Title"] = "Cadastro";
-    ViewData["GreetingTitle"] = "Crie sua conta";
-    ViewData["GreetingMessage"] = "É rápido e fácil. Comece a usar o sistema agora mesmo.";
+    ViewData["GreetingTitle"] = "Olá, BEM VINDO!";
+    ViewData["GreetingMessage"] = "Cadastre-se e comece a usar o sistema agora mesmo.";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/register-steps.css" />
 }
 
 @section BackButton {
     <a asp-action="Login" class="voltar"><i class="fa-solid fa-arrow-left me-2"></i>Voltar</a>
 }
-<!-- Adicionada a classe "form" para aplicar os estilos de compactação -->
-<form asp-controller="Account" asp-action="Register" method="post" class="register-form">
-    <h1 class="form-title mb-4"><strong>Cadastro</strong></h1>
+
+<form id="register-form" asp-controller="Account" asp-action="Register" method="post">
+    <h1 class="form-title mb-1"><strong>Cadastre-se</strong></h1>
 
     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-    <h5 class="mt-4 mb-3">Dados da Empresa</h5>
-    <div class="row gx-2">
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="RazaoSocial" class="form-control h-input" placeholder="Razão Social" />
-                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+    <div id="step-1" class="form-step active">
+        <h2 class="step-subtitle">Dados da Empresa</h2>
+        <div class="form-group">
+            <input asp-for="RazaoSocial" class="form-control h-input" placeholder="Razão Social" required />
+            <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="NomeFantasia" class="form-control h-input" placeholder="Nome Fantasia" />
+            <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="CNPJ" class="form-control h-input" placeholder="CNPJ" required />
+            <span asp-validation-for="CNPJ" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Telefone" class="form-control h-input" placeholder="Telefone" required />
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Email" class="form-control h-input" placeholder="Email" type="email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <select asp-for="RamoDeAtividade" class="form-control h-input" required>
+                <option value="">Ramo de Atividade</option>
+                <option value="Oficina Mecânica">Oficina Mecânica</option>
+                <option value="Funilaria">Funilaria</option>
+                <option value="Auto Elétrica">Auto Elétrica</option>
+                <option value="Loja de Autopeças">Loja de Autopeças</option>
+                <option value="Outro">Outro</option>
+            </select>
+            <span asp-validation-for="RamoDeAtividade" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div id="step-2" class="form-step">
+        <h2 class="step-subtitle">Informações de Endereço</h2>
+        <div class="form-group">
+            <input asp-for="CEP" class="form-control h-input" placeholder="CEP" required />
+            <span asp-validation-for="CEP" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Logradouro" class="form-control h-input" placeholder="Logradouro (Rua, Avenida.)" required />
+            <span asp-validation-for="Logradouro" class="text-danger"></span>
+        </div>
+        <div class="row gx-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input asp-for="Numero" class="form-control h-input" placeholder="Nº" required />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input asp-for="Complemento" class="form-control h-input" placeholder="Complemento" />
+                    <span asp-validation-for="Complemento" class="text-danger"></span>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="NomeFantasia" class="form-control h-input" placeholder="Nome Fantasia" />
-                <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+        <div class="form-group">
+            <input asp-for="Bairro" class="form-control h-input" placeholder="Bairro" required />
+            <span asp-validation-for="Bairro" class="text-danger"></span>
+        </div>
+        <div class="row gx-2">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input asp-for="Localidade" class="form-control h-input" placeholder="Cidade" required />
+                    <span asp-validation-for="Localidade" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input asp-for="UF" class="form-control h-input" placeholder="Estado" required />
+                    <span asp-validation-for="UF" class="text-danger"></span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row gx-2">
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="CNPJ" class="form-control h-input" placeholder="CNPJ" />
-                <span asp-validation-for="CNPJ" class="text-danger"></span>
-            </div>
+    <div id="step-3" class="form-step">
+        <h2 class="step-subtitle">Crie sua Senha</h2>
+        <div class="form-group">
+            <input asp-for="Senha" class="form-control h-input" placeholder="Senha" type="password" required />
+            <span asp-validation-for="Senha" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="Telefone" class="form-control h-input" placeholder="Telefone" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <input asp-for="ConfirmarSenha" class="form-control h-input" placeholder="Confirmar Senha" type="password" required />
+            <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="form-group">
-        <input asp-for="RamoDeAtividade" class="form-control h-input" placeholder="Ramo de Atividade" />
-        <span asp-validation-for="RamoDeAtividade" class="text-danger"></span>
+    <div class="action-buttons">
+        <button type="button" id="prevBtn" class="btn-secondary-custom" style="display: none;">Voltar</button>
+        <button type="button" id="nextBtn" class="btn btn-primary">CONTINUAR</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary" style="display: none;">CADASTRAR</button>
     </div>
-
-    <h5 class="mt-4 mb-3">Endereço</h5>
-    
-    <div class="row gx-2">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input asp-for="CEP" class="form-control h-input" placeholder="CEP" />
-                <span asp-validation-for="CEP" class="text-danger"></span>
-            </div>
+    <div class="pagination-container">
+        <div class="step-pagination">
+            <div class="step-number active" data-step="1">1</div>
+            <div class="step-connector"></div>
+            <div class="step-number" data-step="2">2</div>
+            <div class="step-connector"></div>
+            <div class="step-number" data-step="3">3</div>
         </div>
-        <div class="col-md-8">
-            <div class="form-group">
-                <input asp-for="Logradouro" class="form-control h-input" placeholder="Logradouro (Rua, Av.)" />
-                <span asp-validation-for="Logradouro" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row gx-2">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input asp-for="Numero" class="form-control h-input" placeholder="Nº" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="form-group">
-                <input asp-for="Complemento" class="form-control h-input" placeholder="Complemento" />
-                <span asp-validation-for="Complemento" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row gx-2">
-        <div class="col-md-5">
-            <div class="form-group">
-                <input asp-for="Bairro" class="form-control h-input" placeholder="Bairro" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input asp-for="Localidade" class="form-control h-input" placeholder="Cidade" />
-                <span asp-validation-for="Localidade" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <input asp-for="UF" class="form-control h-input" placeholder="UF" />
-                <span asp-validation-for="UF" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <h5 class="mt-4 mb-3">Credenciais</h5>
-
-    <div class="form-group">
-        <input asp-for="Email" class="form-control h-input" placeholder="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="row gx-2">
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="Senha" class="form-control h-input" placeholder="Senha" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <input asp-for="ConfirmarSenha" class="form-control h-input" placeholder="Confirmar Senha" />
-                <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-     
-    <div class="d-flex justify-content-center mt-4">
-        <button type="submit" class="btn btn-primary">CADASTRAR</button>
-    </div>
-
-    <div class="signup-link">
-        <span>Já tem uma conta? <a asp-controller="Account" asp-action="Login">Faça Login</a></span>
     </div>
 </form>
 
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function () {
+            let currentStep = 1;
+            const steps = document.querySelectorAll('.form-step');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const stepNumbers = document.querySelectorAll('.step-number');
+            const connectors = document.querySelectorAll('.step-connector');
 
-            const cepInput = document.getElementById('CEP');
+            const updateStepPagination = (activeStep) => {
+                stepNumbers.forEach((step, index) => {
+                    const stepNum = index + 1;
+                    step.classList.remove('active', 'completed');
 
-            cepInput.addEventListener('blur', function () {
-                
-                const cep = this.value.replace(/\D/g, '');
+                    if (stepNum === activeStep) {
+                        step.classList.add('active');
+                    } else if (stepNum < activeStep) {
+                        step.classList.add('completed');
+                    }
+                });
 
-                if (cep.length === 8) {
-                    document.getElementById('Logradouro').value = '...';
-                    document.getElementById('Bairro').value = '...';
-                    document.getElementById('Localidade').value = '...';
-                    document.getElementById('UF').value = '...';
+                // Atualiza os conectores
+                connectors.forEach((connector, index) => {
+                    connector.classList.remove('active');
+                    if (index + 1 < activeStep) {
+                        connector.classList.add('active');
+                    }
+                });
+            };
 
-                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (!data.erro) {
-                                document.getElementById('Logradouro').value = data.logradouro;
-                                document.getElementById('Bairro').value = data.bairro;
-                                document.getElementById('Localidade').value = data.localidade;
-                                document.getElementById('UF').value = data.uf;
-                            } else {
-                                alert('CEP não encontrado.');
-                                document.getElementById('Logradouro').value = '';
-                                document.getElementById('Bairro').value = '';
-                                document.getElementById('Localidade').value = '';
-                                document.getElementById('UF').value = '';
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Houve um erro ao buscar o CEP:', error);
-                        });
+            const showStep = (stepNumber) => {
+                steps.forEach(step => step.classList.remove('active'));
+                document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+                // Atualiza a paginação visual
+                updateStepPagination(stepNumber);
+
+                // Lógica de exibição dos botões
+                prevBtn.style.display = stepNumber > 1 ? 'inline-block' : 'none';
+                nextBtn.style.display = stepNumber < steps.length ? 'inline-block' : 'none';
+                submitBtn.style.display = stepNumber === steps.length ? 'inline-block' : 'none';
+            };
+
+            const validateStep = (stepNumber) => {
+                const currentStepInputs = steps[stepNumber - 1].querySelectorAll('input, select');
+                let isValid = true;
+                currentStepInputs.forEach(input => {
+                    if (!input.checkValidity()) {
+                        isValid = false;
+                        input.reportValidity();
+                    }
+                });
+                return isValid;
+            };
+
+            nextBtn.addEventListener('click', () => {
+                if (validateStep(currentStep)) {
+                    if (currentStep < steps.length) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
                 }
             });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+
+            // Permite clicar nos números para navegar (opcional)
+            stepNumbers.forEach((stepNumber, index) => {
+                stepNumber.addEventListener('click', () => {
+                    const targetStep = index + 1;
+
+                    // Só permite navegar para steps anteriores ou o próximo imediato
+                    if (targetStep <= currentStep || targetStep === currentStep + 1) {
+                        if (targetStep === currentStep + 1) {
+                            // Se está indo para o próximo, valida o atual
+                            if (validateStep(currentStep)) {
+                                currentStep = targetStep;
+                                showStep(currentStep);
+                            }
+                        } else {
+                            // Se está voltando, não precisa validar
+                            currentStep = targetStep;
+                            showStep(currentStep);
+                        }
+                    }
+                });
+
+                // Adiciona cursor pointer apenas para steps navegáveis
+                stepNumber.style.cursor = 'pointer';
+            });
+
+            // Inicializa o formulário
+            showStep(currentStep);
+
+            // Integração com ViaCEP (mantida da sua versão anterior)
+            const cepInput = document.getElementById('CEP');
+            if (cepInput) {
+                cepInput.addEventListener('blur', function () {
+                    const cep = this.value.replace(/\D/g, '');
+                    if (cep.length === 8) {
+                        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (!data.erro) {
+                                    const logradouro = document.getElementById('Logradouro');
+                                    const bairro = document.getElementById('Bairro');
+                                    const localidade = document.getElementById('Localidade');
+                                    const uf = document.getElementById('UF');
+                                    const numero = document.getElementById('Numero');
+
+                                    if (logradouro) logradouro.value = data.logradouro;
+                                    if (bairro) bairro.value = data.bairro;
+                                    if (localidade) localidade.value = data.localidade;
+                                    if (uf) uf.value = data.uf;
+                                    if (numero) numero.focus();
+                                }
+                            }).catch(error => console.error('Erro ao buscar CEP:', error));
+                    }
+                });
+            }
         });
+
     </script>
 }

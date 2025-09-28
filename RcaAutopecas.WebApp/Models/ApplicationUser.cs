@@ -9,8 +9,6 @@ namespace RcaAutopecas.WebApp.Models
         public string CNPJ { get; set; }
         public string Telefone { get; set; }
         public string RamoDeAtividade { get; set; }
-
-        // Propriedade de navegação para o Endereco
         public virtual Endereco Endereco { get; set; }
     }
 }

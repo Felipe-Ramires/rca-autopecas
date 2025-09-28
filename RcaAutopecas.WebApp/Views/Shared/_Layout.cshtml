@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/stylesHome.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RcaAutopecas.WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/whatsapp-Icon.css" asp-append-version="true" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -90,12 +91,13 @@
 
                 </div>
             </div>
-            <article class="py-3 px-5 ">               
-                    @RenderBody()           
-            </article>
+            <article class="py-3 px-4 px-sm-5">
+                @RenderBody()           
+            </article> 
         </section>
 
     </main>
+    @await Html.PartialAsync("_WhatsAppIcon")
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
