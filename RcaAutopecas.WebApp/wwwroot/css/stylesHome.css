@@ -230,7 +230,10 @@ article {
     color: #fff;
     font-weight: 600;
 }
-
+.nav-link :hover {
+    transition: transform 0.20s ease;
+    transform: scale(1.1);
+}
 @media (min-width: 768px) {
     .offcanvas-md {
         position: static !important;
@@ -243,6 +246,7 @@ article {
     .offcanvas-backdrop {
         display: none !important;
     }
+
 }
 
 @media (max-width: 767.98px) {
