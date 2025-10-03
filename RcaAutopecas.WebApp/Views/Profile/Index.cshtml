@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RcaAutopecas.WebApp.ViewModels.ProfileViewModel
+
+@{
     ViewData["Title"] = "Meu Perfil";
 }
 
@@ -15,10 +17,132 @@
     <h3 class="m-0">Meu Perfil</h3>
 }
 
-<div class="profile-header">
-    <div class="profile-picture"></div>
-    <div class="profile-options">
-        <h3> @ViewData["NomeDaEmpresa"]</h3>
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    </div>
-</div>
+
+
+        <div class="d-flex align-items-center mb-4 border-bottom pb-3">
+            <div class="flex-shrink-0">
+                <i class="fa-solid fa-user-circle fa-4x text-secondary"></i>
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h4 class="mb-0">@Model.NomeFantasia</h4>
+                <p class="text-muted mb-0">@Model.Email</p>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-dados-tab" data-bs-toggle="pill" data-bs-target="#pills-dados" type="button" role="tab">Dados da Empresa</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-endereco-tab" data-bs-toggle="pill" data-bs-target="#pills-endereco" type="button" role="tab">Endereço de Entrega</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-dados" role="tabpanel">
+                <h5 class="mb-3">Informações da Empresa</h5>
+                <form asp-action="UpdateCompanyData" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NomeFantasia" class="form-label"></label>
+                            <input asp-for="NomeFantasia" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RazaoSocial" class="form-label"></label>
+                            <input asp-for="RazaoSocial" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CNPJ" class="form-label"></label>
+                            <input asp-for="CNPJ" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Telefone" class="form-label"></label>
+                            <input asp-for="Telefone" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RamoDeAtividade" class="form-label"></label>
+                            <select asp-for="RamoDeAtividade" class="form-select">
+                                <option value="">Selecione...</option>
+                                <option value="Oficina Mecânica">Oficina Mecânica</option>
+                                <option value="Auto Elétrica">Auto Elétrica</option>
+                                <option value="Loja de Autopeças">Loja de Autopeças</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar Dados</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="pills-endereco" role="tabpanel">
+                <h5 class="mb-3">Informações de Endereço</h5>
+                <form asp-action="UpdateAddressData" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="CEP" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="CEP" class="form-control" />
+                                <button class="btn btn-outline-secondary" type="button" id="btnBuscarCep">Buscar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <label asp-for="Logradouro" class="form-label"></label>
+                            <input asp-for="Logradouro" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="Numero" class="form-label"></label>
+                            <input asp-for="Numero" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Complemento" class="form-label"></label>
+                            <input asp-for="Complemento" class="form-control" placeholder="(Opcional)" />
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label asp-for="Bairro" class="form-label"></label>
+                            <input asp-for="Bairro" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Localidade" class="form-label"></label>
+                            <input asp-for="Localidade" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="UF" class="form-label"></label>
+                            <input asp-for="UF" class="form-control" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar Endereço</button>
+                </form>
+            </div>
+        </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Reutilize aqui o seu script de busca de CEP da tela de registro.
+        // Ele vai funcionar perfeitamente.
+        document.getElementById('btnBuscarCep').addEventListener('click', function() {
+            const cep = document.getElementById('CEP').value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.querySelector('[name="Logradouro"]').value = data.logradouro;
+                            document.querySelector('[name="Bairro"]').value = data.bairro;
+                            document.querySelector('[name="Localidade"]').value = data.localidade;
+                            document.querySelector('[name="UF"]').value = data.uf;
+                            document.querySelector('[name="Numero"]').focus();
+                        } else {
+                            alert('CEP não encontrado.');
+                        }
+                    }).catch(error => console.error('Erro ao buscar CEP:', error));
+            } else {
+                alert('Por favor, digite um CEP válido.');
+            }
+        });
+    </script>
+}
