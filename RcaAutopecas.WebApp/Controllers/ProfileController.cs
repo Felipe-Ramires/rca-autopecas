@@ -82,7 +82,8 @@ namespace RcaAutopecas.WebApp.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return View("Index", model);
+            
+                return View("Index", model);
         }
 
         [HttpPost]

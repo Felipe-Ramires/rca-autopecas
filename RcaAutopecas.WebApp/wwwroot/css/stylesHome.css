@@ -234,8 +234,60 @@ article {
     transition: transform 0.20s ease;
     transform: scale(1.1);
 }
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/profilePhoto.jpg);
+    background-size: cover;
+    border: solid #BCBDBF 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.profile-circle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: not-allowed;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    font-size: 18px;
+    border: none;
+    color: #838383;
+    height: 45px;
+}
+
+    .form-control:focus {
+        outline: none;
+        border: 2px solid #0056b3;
+        background-color: #fff;
+    }
+.form-select {
+    background-color: #f0f0f0;
+    border-radius: 30px;
+    border: none;
+    color: #838383;
+    height: 45px;
+    font-size: 18px;
+    padding: 0px 25px;
+}
+.form-select:focus {
+    outline: none;
+    border: 2px solid #0056b3;
+    background-color: #fff;
+}
+
 @media (min-width: 768px) {
-    .offcanvas-md {
+        .offcanvas-md {
         position: static !important;
         transform: none !important;
         visibility: visible !important;
