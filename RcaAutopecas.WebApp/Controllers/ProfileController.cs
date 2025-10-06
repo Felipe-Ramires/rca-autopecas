@@ -34,15 +34,12 @@ namespace RcaAutopecas.WebApp.Controllers
 
             var viewModel = new ProfileViewModel
             {
-                // Dados da Empresa
                 NomeFantasia = user.NomeFantasia,
                 RazaoSocial = user.RazaoSocial,
                 CNPJ = user.CNPJ,
                 Telefone = user.Telefone,
                 Email = user.Email,
                 RamoDeAtividade = user.RamoDeAtividade,
-
-                // Endereço (verifica se o endereço não é nulo)
                 CEP = user.Endereco?.CEP,
                 Logradouro = user.Endereco?.Logradouro,
                 Numero = user.Endereco?.Numero,
@@ -59,6 +56,15 @@ namespace RcaAutopecas.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateCompanyData(ProfileViewModel model)
         {
+            ModelState.Remove("CEP");
+            ModelState.Remove("Logradouro");
+            ModelState.Remove("Numero");
+            ModelState.Remove("Complemento");
+            ModelState.Remove("Bairro");
+            ModelState.Remove("Localidade");
+            ModelState.Remove("UF");
+            ModelState.Remove("Email");
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -82,14 +88,18 @@ namespace RcaAutopecas.WebApp.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            
-                return View("Index", model);
+            return View("Index", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddressData(ProfileViewModel model)
         {
+            ModelState.Remove("RazaoSocial");
+            ModelState.Remove("CNPJ");
+            ModelState.Remove("Telefone");
+            ModelState.Remove("Email");
+
             if (ModelState.IsValid)
             {
                 var user = await _context.Users.Include(u => u.Endereco).FirstOrDefaultAsync(u => u.Id == _userManager.GetUserId(User));
