@@ -123,6 +123,15 @@ article {
     height: 100%;
     border-radius: 20px;
 }
+
+.toast-container-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+}
+
 /* ======================================================= */
 /* REGRAS PARA O NAVBAR E LAYOUT RESPONSIVO                */
 /* ======================================================= */

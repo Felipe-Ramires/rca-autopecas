@@ -92,6 +92,18 @@
                 </div>
             </div>
             <article class="py-3 px-4 px-sm-5">
+                <div class="toast-container-wrapper">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div id="success-toast" class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                            <i class="fa-solid fa-circle-check me-2 fa-lg"></i>
+                            <div>
+                                @TempData["SuccessMessage"]
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                </div>
                 @RenderBody()           
             </article> 
         </section>
