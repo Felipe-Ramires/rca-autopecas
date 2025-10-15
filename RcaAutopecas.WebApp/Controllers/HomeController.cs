@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity; 
 using Microsoft.AspNetCore.Mvc;
-using RcaAutopecas.WebApp.Models; 
+using RcaAutopecas.WebApp.Models;
+using RcaAutopecas.WebApp.ViewModels;
 using System.Threading.Tasks; 
 
 namespace RcaAutopecas.WebApp.Controllers

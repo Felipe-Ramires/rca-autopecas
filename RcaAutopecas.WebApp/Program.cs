@@ -5,7 +5,6 @@ using RcaAutopecas.WebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(connectionString));
@@ -13,11 +12,9 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<Context>();
 
-
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -25,12 +22,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles(); 
 
 app.UseRouting();
 
-
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
