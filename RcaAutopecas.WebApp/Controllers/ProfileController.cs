@@ -24,29 +24,31 @@ namespace RcaAutopecas.WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _context.Users
-                                     .Include(u => u.Endereco)
+                                     .Include(u => u.Cliente)
+                                     .ThenInclude(c => c.Endereco)
                                      .FirstOrDefaultAsync(u => u.Id == _userManager.GetUserId(User));
 
-            if (user == null)
+            if (user == null || user.Cliente == null)
             {
                 return NotFound();
             }
 
+            var cliente = user.Cliente;
             var viewModel = new ProfileViewModel
             {
-                NomeFantasia = user.NomeFantasia,
-                RazaoSocial = user.RazaoSocial,
-                CNPJ = user.CNPJ,
-                Telefone = user.Telefone,
+                NomeFantasia = cliente.NomeFantasia,
+                RazaoSocial = cliente.RazaoSocial,
+                CNPJ = cliente.CNPJ,
+                Telefone = cliente.Telefone,
                 Email = user.Email,
-                RamoDeAtividade = user.RamoDeAtividade,
-                CEP = user.Endereco?.CEP,
-                Logradouro = user.Endereco?.Logradouro,
-                Numero = user.Endereco?.Numero,
-                Complemento = user.Endereco?.Complemento,
-                Bairro = user.Endereco?.Bairro,
-                Localidade = user.Endereco?.Localidade,
-                UF = user.Endereco?.UF
+                RamoDeAtividade = cliente.RamoDeAtividade,
+                CEP = cliente.Endereco?.CEP,
+                Logradouro = cliente.Endereco?.Logradouro,
+                Numero = cliente.Endereco?.Numero,
+                Complemento = cliente.Endereco?.Complemento,
+                Bairro = cliente.Endereco?.Bairro,
+                Localidade = cliente.Endereco?.Localidade,
+                UF = cliente.Endereco?.UF
             };
 
             return View(viewModel);
@@ -67,26 +69,21 @@ namespace RcaAutopecas.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null) return NotFound();
+                var user = await _context.Users.Include(u => u.Cliente).FirstOrDefaultAsync(u => u.Id == _userManager.GetUserId(User));
+                if (user == null || user.Cliente == null) return NotFound();
 
-                user.NomeFantasia = model.NomeFantasia;
-                user.RazaoSocial = model.RazaoSocial;
-                user.CNPJ = model.CNPJ;
-                user.Telefone = model.Telefone;
-                user.RamoDeAtividade = model.RamoDeAtividade;
+                var cliente = user.Cliente;
+                cliente.NomeFantasia = model.NomeFantasia;
+                cliente.RazaoSocial = model.RazaoSocial;
+                cliente.CNPJ = model.CNPJ;
+                cliente.Telefone = model.Telefone;
+                cliente.RamoDeAtividade = model.RamoDeAtividade;
 
-                var result = await _userManager.UpdateAsync(user);
+                _context.Clientes.Update(cliente);
+                await _context.SaveChangesAsync();
 
-                if (result.Succeeded)
-                {
-                    TempData["SuccessMessage"] = "Dados da empresa atualizados com sucesso!";
-                    return RedirectToAction("Index");
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                TempData["SuccessMessage"] = "Dados da empresa atualizados com sucesso!";
+                return RedirectToAction("Index");
             }
             return View("Index", model);
         }
@@ -102,23 +99,23 @@ namespace RcaAutopecas.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await _context.Users.Include(u => u.Endereco).FirstOrDefaultAsync(u => u.Id == _userManager.GetUserId(User));
-                if (user == null) return NotFound();
+                var user = await _context.Users.Include(u => u.Cliente).ThenInclude(c => c.Endereco).FirstOrDefaultAsync(u => u.Id == _userManager.GetUserId(User));
+                if (user == null || user.Cliente == null) return NotFound();
 
-                if (user.Endereco == null)
+                if (user.Cliente.Endereco == null)
                 {
-                    user.Endereco = new Endereco();
+                    user.Cliente.Endereco = new Endereco();
                 }
 
-                user.Endereco.CEP = model.CEP;
-                user.Endereco.Logradouro = model.Logradouro;
-                user.Endereco.Numero = model.Numero;
-                user.Endereco.Complemento = model.Complemento;
-                user.Endereco.Bairro = model.Bairro;
-                user.Endereco.Localidade = model.Localidade;
-                user.Endereco.UF = model.UF;
+                user.Cliente.Endereco.CEP = model.CEP;
+                user.Cliente.Endereco.Logradouro = model.Logradouro;
+                user.Cliente.Endereco.Numero = model.Numero;
+                user.Cliente.Endereco.Complemento = model.Complemento;
+                user.Cliente.Endereco.Bairro = model.Bairro;
+                user.Cliente.Endereco.Localidade = model.Localidade;
+                user.Cliente.Endereco.UF = model.UF;
 
-                _context.Update(user);
+                _context.Update(user.Cliente.Endereco);
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Endereço atualizado com sucesso!";
