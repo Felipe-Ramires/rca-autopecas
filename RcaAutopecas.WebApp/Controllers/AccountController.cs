@@ -33,14 +33,21 @@ namespace RcaAutopecas.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // No login, o UserName deve ser o Email para o Identity encontrar o usuário
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, isPersistent: false, lockoutOnFailure: false);
-
-                if (result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    // Verifica se o usuário é um cliente
+                    var isCliente = await _userManager.IsInRoleAsync(user, "Cliente");
+                    if (isCliente)
+                    {
+                        var result = await _signInManager.PasswordSignInAsync(user, model.Senha, isPersistent: false, lockoutOnFailure: false);
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
                 }
-                ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
+                ModelState.AddModelError(string.Empty, "Acesso negado. Verifique se você está na página de login correta.");
             }
             return View(model);
         }

@@ -8,7 +8,7 @@
     <h3 class="m-0">Cadastrar Novo Vendedor</h3>
 }
 
-<hr />
+
 <div class="row">
     <div class="col-md-6">
         <form asp-controller="Vendedor" asp-action="Create" method="post">
@@ -21,7 +21,7 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
-            <div class="form-group form-check">
+            <div class="form-group form-check mt-2 ">
                 <input class="form-check-input" asp-for="IsAdmin" />
                 <label class="form-check-label" asp-for="IsAdmin"></label>
             </div>
