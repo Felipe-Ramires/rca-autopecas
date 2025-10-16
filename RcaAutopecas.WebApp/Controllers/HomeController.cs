@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RcaAutopecas.WebApp.Data;
 using RcaAutopecas.WebApp.Models;
+using RcaAutopecas.WebApp.ViewModels;
 using System.Threading.Tasks;
 
 namespace RcaAutopecas.WebApp.Controllers
@@ -23,19 +24,21 @@ namespace RcaAutopecas.WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users
+                .Include(u => u.Vendedor)  // Eagerly load the Vendedor profile
+                .Include(u => u.Cliente)   // Eagerly load the Cliente profile
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user != null)
             {
                 if (await _userManager.IsInRoleAsync(user, "Cliente"))
                 {
-                    var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ApplicationUserId == userId);
-                    ViewData["Greeting"] = $"Olá, {cliente?.NomeFantasia}!";
+                    ViewData["Greeting"] = $"Olá, {user.Cliente?.NomeFantasia}!";
                 }
                 else if (await _userManager.IsInRoleAsync(user, "Vendedor") || await _userManager.IsInRoleAsync(user, "AdminVendedor"))
                 {
-                    var vendedor = await _context.Vendedores.FirstOrDefaultAsync(v => v.ApplicationUserId == userId);
-                    ViewData["Greeting"] = $"Olá, {vendedor?.Nome}!";
+                    // Now we use the included Vendedor object, no separate query needed
+                    ViewData["Greeting"] = $"Olá, {user.Vendedor?.Nome}!";
                 }
                 else
                 {

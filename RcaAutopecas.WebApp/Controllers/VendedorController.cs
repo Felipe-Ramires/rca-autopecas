@@ -43,8 +43,15 @@ namespace RcaAutopecas.WebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Assign the 'Vendedor' role to the new user
-                    await _userManager.AddToRoleAsync(user, "Vendedor");
+                    // Assign the appropriate role based on the IsAdmin flag
+                    if (model.IsAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, "AdminVendedor");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Vendedor");
+                    }
 
                     // Redirect to a confirmation page or the list of sellers
                     return RedirectToAction("Index", "Home"); // Placeholder

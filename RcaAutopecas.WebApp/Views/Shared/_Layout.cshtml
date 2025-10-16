@@ -52,7 +52,7 @@
                         {
                             <li class="nav-item">
                                 <a asp-controller="Vendedor" asp-action="Create" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Cadastrar Vendedor">
-                                    <i class="fa-solid fa-user-plus fa-2xl"
+                                    <i class="fa-solid fa-user-plus fa-xl"
                                        style="color:#ffffff"></i>
                                 </a>
                             </li>
@@ -61,13 +61,16 @@
                 </div>
                 <div class="user-area mt-auto">
                     <ul class="nav nav-pills flex-column mb-auto gap-3">
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Cliente"))
                         {
                             <li class="nav-item">
                                 <a asp-controller="Profile" asp-action="Index" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Meu Perfil">
                                     <i class="fa-solid fa-circle-user fa-2xl" style="color:#ffffff"></i>
                                 </a>
                             </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="nav-link p-0">
                                     @Html.AntiForgeryToken()

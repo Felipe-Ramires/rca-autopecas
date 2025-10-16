@@ -19,5 +19,8 @@ namespace RcaAutopecas.WebApp.ViewModels
 
         [Required]
         public string Nome { get; set; } = string.Empty;
+
+        [Display(Name = "É Administrador?")]
+        public bool IsAdmin { get; set; }
     }
 }
