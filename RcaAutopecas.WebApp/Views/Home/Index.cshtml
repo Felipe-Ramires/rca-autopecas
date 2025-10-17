@@ -1,4 +1,5 @@
-﻿@{
+@model RcaAutopecas.WebApp.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Página Principal";
 }
 
@@ -8,12 +9,12 @@
 
 
 <div class="py-3">
-    <h2>@ViewData["Greeting"]</h2>
+    <h2 class="m-0">@ViewData["Greeting"]</h2>
     <h4 class="text-secondary">Que bom ter você por aqui!</h4>
 </div>
 
 
-<ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
+<ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                 data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
@@ -39,25 +40,61 @@
 
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-        <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0">
-                <div class="card card-custom card-light h-100">
-                    <div class="card-body">
-                        <img src="~/images/rca-favicon.png" alt="Logo DTS" class="mb-3" style="width: 40px;">
-                        <h4 class="card-title text-rcea fw-bold">DTS</h4>
-                        <h3 class="card-subtitle mb-4 fw-bold text-rcea">Para-Choques</h3>
-                        <a href="#" class="btn btn-primary-rca rounded-pill px-4">Confira</a>
-                    </div>
-                </div>
+        <div class="destaques-section">
+            <!-- Header da seção -->
+            <div class="destaques-header">
+                <h3 class="destaques-title">
+                    <i class="fas fa-star"></i>
+                    Destaques Especiais
+                </h3>
+                <p class="destaques-subtitle">Confira as melhores ofertas e produtos em destaque</p>
             </div>
 
-            <div class="col-md-6">
-                <div class="card card-custom card-dark h-100">
-                    <div class="card-body">
-                        <img src="~/images/logo-simbolo.png" alt="Logo ARTEB" class="mb-3" style="width: 40px;">
-                        <h4 class="card-title fw-bold">ARTEB</h4>
-                        <h3 class="card-subtitle mb-4 fw-bold">Faróis e Lanternas</h3>
-                        <a href="#" class="btn btn-light rounded-pill px-4">Confira</a>
+            <!-- Grid de Cards -->
+            <div class="destaques-grid">
+                <!-- Card 1: DTS Para-Choques -->
+                <div class="destaque-card destaque-card-light">
+                    <div class="destaque-card-header">
+                        <div class="destaque-icon-wrapper light">
+                            <img src="~/images/rca-favicon.png" alt="Logo DTS" class="destaque-icon">
+                        </div>
+                        <div class="destaque-badge">Novo</div>
+                    </div>
+
+                    <div class="destaque-card-content">
+                        <h4 class="destaque-card-title">DTS</h4>
+                        <p class="destaque-card-category">Para-Choques</p>
+                        <p class="destaque-card-description">Produtos de qualidade superior para proteção e estética do seu veículo</p>
+                    </div>
+
+                    <div class="destaque-card-footer">
+                        <a href="#" class="btn btn-destaque btn-destaque-primary">
+                            <span>Confira</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: ARTEB Faróis e Lanternas -->
+                <div class="destaque-card destaque-card-dark">
+                    <div class="destaque-card-header">
+                        <div class="destaque-icon-wrapper dark">
+                            <img src="~/images/logo-simbolo.png" alt="Logo ARTEB" class="destaque-icon">
+                        </div>
+                        <div class="destaque-badge destaque-badge-premium">Premium</div>
+                    </div>
+
+                    <div class="destaque-card-content">
+                        <h4 class="destaque-card-title">ARTEB</h4>
+                        <p class="destaque-card-category">Faróis e Lanternas</p>
+                        <p class="destaque-card-description">Iluminação premium para maior segurança e visibilidade na estrada</p>
+                    </div>
+
+                    <div class="destaque-card-footer">
+                        <a href="#" class="btn btn-destaque btn-destaque-secondary">
+                            <span>Confira</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -68,7 +105,68 @@
         Conteúdo da aba Seus pedidos.
     </div>
     <div class="tab-pane fade container" id="pills-contact" role="tabpanel"
-         aria-labelledby="pills-contact-tab">
-        Conteúdo da aba Meu Perfil.
+     aria-labelledby="pills-contact-tab">
+    
+        <!-- Header com ícone e informação principal -->
+        <div class="profile-header">
+            <div class="profile-icon-wrapper">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-title-area">
+                <h5 class="profile-section-label">Informações do Perfil</h5>
+                <p class="profile-section-subtitle">@Model.Perfil.Nome</p>
+            </div>
+        </div>
+
+        <!-- Grid de Informações -->
+        <div class="profile-grid">
+            
+            <!-- Card 1: Tipo de Perfil -->
+            <div class="profile-info-card">
+                <div class="profile-info-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="profile-info-label">Tipo de Perfil</span>
+                </div>
+                <p class="profile-info-value">@Model.Perfil.TipoPerfil</p>
+            </div>
+
+            <!-- Card 2: Email -->
+            <div class="profile-info-card">
+                <div class="profile-info-header">
+                    <i class="fas fa-envelope"></i>
+                    <span class="profile-info-label">Email</span>
+                </div>
+                <p class="profile-info-value">@Model.Perfil.Email</p>
+            </div>
+
+            <!-- Card 3: Documento -->
+            <div class="profile-info-card">
+                <div class="profile-info-header">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="profile-info-label">Documento</span>
+                </div>
+                <p class="profile-info-value">@Model.Perfil.Documento</p>
+            </div>
+
+            <!-- Card 4: Telefone -->
+            <div class="profile-info-card">
+                <div class="profile-info-header">
+                    <i class="fas fa-phone"></i>
+                    <span class="profile-info-label">Telefone</span>
+                </div>
+                <p class="profile-info-value">@Model.Perfil.Telefone</p>
+            </div>
+        </div>
+
+        <!-- Seção de Ação -->
+        <div class="profile-action-area">
+            @if (Model.PodeEditarPerfil)
+            {
+                <a asp-controller="Profile" asp-action="Index" class="btn btn-edit-profile">
+                    <i class="fas fa-edit"></i>
+                    <span>Editar Perfil Completo</span>
+                </a>
+            }
+        </div>
     </div>
 </div>
