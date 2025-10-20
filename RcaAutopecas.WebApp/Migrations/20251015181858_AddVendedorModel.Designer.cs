@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RcaAutopecas.WebApp.Data;
 
@@ -11,9 +12,11 @@ using RcaAutopecas.WebApp.Data;
 namespace RcaAutopecas.WebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251015181858_AddVendedorModel")]
+    partial class AddVendedorModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,10 +105,12 @@ namespace RcaAutopecas.WebApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -142,10 +147,12 @@ namespace RcaAutopecas.WebApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -162,6 +169,10 @@ namespace RcaAutopecas.WebApp.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -180,6 +191,10 @@ namespace RcaAutopecas.WebApp.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("NomeFantasia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -197,7 +212,19 @@ namespace RcaAutopecas.WebApp.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RamoDeAtividade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -220,7 +247,7 @@ namespace RcaAutopecas.WebApp.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Cliente", b =>
+            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,42 +259,6 @@ namespace RcaAutopecas.WebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CNPJ")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeFantasia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RamoDeAtividade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RazaoSocial")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
-
-                    b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Endereco", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Bairro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -275,9 +266,6 @@ namespace RcaAutopecas.WebApp.Migrations
                     b.Property<string>("CEP")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("nvarchar(max)");
@@ -312,7 +300,7 @@ namespace RcaAutopecas.WebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId")
+                    b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
                     b.ToTable("Enderecos");
@@ -329,6 +317,10 @@ namespace RcaAutopecas.WebApp.Migrations
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Matricula")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -393,26 +385,15 @@ namespace RcaAutopecas.WebApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Cliente", b =>
+            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Endereco", b =>
                 {
                     b.HasOne("RcaAutopecas.WebApp.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Cliente")
-                        .HasForeignKey("RcaAutopecas.WebApp.Models.Cliente", "ApplicationUserId")
+                        .WithOne("Endereco")
+                        .HasForeignKey("RcaAutopecas.WebApp.Models.Endereco", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Endereco", b =>
-                {
-                    b.HasOne("RcaAutopecas.WebApp.Models.Cliente", "Cliente")
-                        .WithOne("Endereco")
-                        .HasForeignKey("RcaAutopecas.WebApp.Models.Endereco", "ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("RcaAutopecas.WebApp.Models.Vendedor", b =>
@@ -428,14 +409,11 @@ namespace RcaAutopecas.WebApp.Migrations
 
             modelBuilder.Entity("RcaAutopecas.WebApp.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Cliente");
+                    b.Navigation("Endereco")
+                        .IsRequired();
 
-                    b.Navigation("Vendedor");
-                });
-
-            modelBuilder.Entity("RcaAutopecas.WebApp.Models.Cliente", b =>
-                {
-                    b.Navigation("Endereco");
+                    b.Navigation("Vendedor")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

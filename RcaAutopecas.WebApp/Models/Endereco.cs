@@ -34,8 +34,8 @@ namespace RcaAutopecas.WebApp.Models
         public string? Ddd { get; set; }
         public string? Siafi { get; set; }
 
-        // Chave estrangeira para ApplicationUser
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        // Chave estrangeira para Cliente
+        public int ClienteId { get; set; }
+        public Cliente Cliente { get; set; }
     }
 }
