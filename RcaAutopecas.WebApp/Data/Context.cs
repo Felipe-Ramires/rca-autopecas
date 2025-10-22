@@ -6,14 +6,14 @@ namespace RcaAutopecas.WebApp.Data
 {
     public class Context : IdentityDbContext<ApplicationUser>
     {
-        public Context(DbContextOptions<Context> options)
-            : base(options)
+        public Context(DbContextOptions<Context> options): base(options)
         {
         }
 
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Vendedor> Vendedores { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,34 +1,50 @@
-﻿@{
+﻿@model RcaAutopecas.WebApp.ViewModels.ProdutoViewModel
+@{
     ViewData["Title"] = "Produtos";
+}
+@section Styles {
+   <style>
+
+       article{
+            width: 100%;
+            height: 100%;
+            overflow: auto;       
+       }
+
+   </style>
 }
 
 @section PageHeader {
     <h3 class="m-0">Produtos</h3>
 }
-
+<div class="product-page">
 <div class="py-3">
-    <h3 class="m-0">Explore nossos produtos</h3>
+        <h3 class="m-0">
+            Explore nosso catálogo de produtos
+        </h3>
     <hr>
 </div>
 
 <div class="row g-4">
-    <!-- foreach  -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="product-card">
-            <div class="product-img">
-                <img src="" alt="Farol Onix" class="img-fluid">
-            </div>
-            <div class="product-info">
-                <div class="product-brand">Marca do Produto</div>
-                <div class="product-name">Nome do Produto</div>
-                <div class="product-price">
-                    <div class="price-text">R$ 583,20</div>
-                    <button class="cart-btn">
-                        <i class="fa-solid fa-cart-plus"></i>
-                    </button>
+    @foreach (var produto in Model.ListaProdutos)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="" alt="@produto.Rca" class="img-fluid">
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">@produto.Familia</div>
+                    <div class="product-name">@produto.Nome</div>
+                        <div class="product-price">
+                        <div class="price-text">@produto.Venda.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</div>
+                        <button class="cart-btn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Fim do foreach -->
+    }
+</div>
 </div>
